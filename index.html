@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人介绍</title>
+    <title>海葵呀 - 个人介绍</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,7 +14,9 @@
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #6e45e2, #88d3ce);
+            color: #333;
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -21,205 +24,392 @@
             padding: 20px;
         }
         
-        .card {
-            background-color: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        .container {
+            max-width: 900px;
             width: 100%;
-            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            padding: 40px 30px 30px;
-            text-align: center;
-            color: white;
+            padding: 40px;
             position: relative;
         }
         
-        .avatar-container {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.5s ease;
-        }
-        
-        .avatar-container:hover {
-            transform: scale(1.05) rotate(5deg);
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
         }
         
         .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            border: 6px solid #6e45e2;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.5s ease;
+        }
+        
+        .avatar:hover {
+            transform: scale(1.05);
+        }
+        
+        .avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
         
         .name {
-            font-size: 28px;
+            font-size: 42px;
+            color: #6e45e2;
+            margin-bottom: 10px;
             font-weight: 700;
-            margin-bottom: 5px;
             letter-spacing: 1px;
         }
         
-        .title {
+        .tagline {
+            font-size: 22px;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .description {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #777;
             font-size: 16px;
-            opacity: 0.9;
-            font-weight: 400;
+            line-height: 1.8;
         }
         
         .content {
-            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
         }
         
         .section {
-            margin-bottom: 25px;
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 20px;
         }
         
-        .section h3 {
-            color: #333;
-            font-size: 18px;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f0f0;
+        .section-title {
+            font-size: 24px;
+            color: #6e45e2;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #eee;
             position: relative;
         }
         
-        .section h3:after {
+        .section-title::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: -3px;
             left: 0;
-            width: 50px;
-            height: 2px;
-            background: #6a11cb;
+            width: 60px;
+            height: 3px;
+            background: #6e45e2;
         }
         
-        .section p {
-            color: #555;
-            line-height: 1.6;
-            font-size: 15px;
+        .contact-list {
+            list-style: none;
         }
         
-        .skills {
+        .contact-item {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
         
-        .skill {
-            background: #f0f5ff;
-            color: #6a11cb;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            background-color: #f0f2ff;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #6e45e2, #88d3ce);
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .contact-value {
+            color: #777;
+            font-size: 15px;
         }
         
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            margin-top: 30px;
+            gap: 20px;
         }
         
         .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #f0f5ff;
             display: flex;
-            align-items: center;
             justify-content: center;
-            color: #6a11cb;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            color: white;
             text-decoration: none;
+            font-size: 24px;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .social-link:hover {
-            background: #6a11cb;
-            color: white;
-            transform: translateY(-3px);
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .bilibili {
+            background: linear-gradient(135deg, #fb7299, #ff2769);
+        }
+        
+        .kuaishou {
+            background: linear-gradient(135deg, #ff5000, #ff9900);
+        }
+        
+        .email {
+            background: linear-gradient(135deg, #4285f4, #34a853);
+        }
+        
+        .qq {
+            background: linear-gradient(135deg, #12b7f5, #0084ff);
+        }
+        
+        .wechat {
+            background: linear-gradient(135deg, #07c160, #05a049);
         }
         
         .footer {
             text-align: center;
-            padding: 20px;
-            color: #888;
+            margin-top: 40px;
+            color: #777;
             font-size: 14px;
-            border-top: 1px solid #f0f0f0;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: linear-gradient(135deg, #6e45e2, #88d3ce);
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            margin: 0 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .name {
+                font-size: 36px;
+            }
+            
+            .tagline {
+                font-size: 20px;
+            }
+            
+            .avatar {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
         }
         
         @media (max-width: 480px) {
-            .header {
-                padding: 30px 20px 20px;
-            }
-            
-            .avatar-container {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .content {
+            .container {
                 padding: 20px;
+            }
+            
+            .name {
+                font-size: 32px;
+            }
+            
+            .tagline {
+                font-size: 18px;
+            }
+            
+            .section {
+                min-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="card">
+    <div class="container">
         <div class="header">
-            <div class="avatar-container">
-                <img src="23-topaz-enhance-4x.png" alt="个人头像" class="avatar">
+            <div class="avatar">
+                <img src="https://interim-green-v2kp2a3kbv.edgeone.app/23-topaz-enhance-4x.png" alt="海葵呀的头像">
             </div>
             <h1 class="name">海葵呀</h1>
-            <p class="title">furry控 & 科技圈爱好者</p>
+            <p class="tagline">furry控 & 科技圈爱好者</p>
+            <p class="description">热爱探索科技前沿，对furry文化有浓厚兴趣。喜欢分享生活中的点滴，欢迎与我交流！</p>
+            <div>
+                <span class="badge">科技爱好者</span>
+                <span class="badge">Furry文化</span>
+                <span class="badge">内容创作者</span>
+            </div>
         </div>
         
         <div class="content">
             <div class="section">
-                <h3>关于我</h3>
-                <p>你好！我是一名初三的furry控</p>
+                <h2 class="section-title">关于我</h2>
+                <p>你好！我是海葵呀，一名对科技充满热情的furry爱好者。我喜欢探索最新的科技动态，同时也热爱furry文化的创造与分享。通过不同的社交平台，我希望能与更多志同道合的朋友交流，分享彼此的兴趣和见解。</p>
+                <p>无论是讨论最新的科技产品，还是分享furry艺术的创作，我都乐于参与。如果你也有相同的兴趣，欢迎通过下面的联系方式与我交流！</p>
             </div>
             
             <div class="section">
-                <h3>专业技能</h3>
-                <div class="skills">
-                    <span class="skill">科技圈爱好者</span>
-                    <span class="skill">furry控</span>
-                </div>
-            </div>
-            
-            <div class="section">
-                <h3>联系方式</h3>
-                <p>邮箱: zeng5310245@qq.com</p>
-                <p>QQ: 2522144315</p>
-                <p>微信：LXH112233-332211</p>
-                <P>bilibili：海葵呀-furry控</P>
-                
-                <div class="social-links">
-                    <a href="#" class="social-link">Git</a>
-                    <a href="#" class="social-link">In</a>
-                    <a href="#" class="social-link">Tw</a>
-                    <a href="#" class="social-link">Be</a>
-                </div>
+                <h2 class="section-title">联系方式</h2>
+                <ul class="contact-list">
+                    <li class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-label">邮箱</div>
+                            <div class="contact-value">zeng5310245@qq.com</div>
+                        </div>
+                    </li>
+                    <li class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-qq"></i>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-label">QQ</div>
+                            <div class="contact-value">2522144315</div>
+                        </div>
+                    </li>
+                    <li class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-weixin"></i>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-label">微信</div>
+                            <div class="contact-value">LXH112233-332211</div>
+                        </div>
+                    </li>
+                    <li class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-tv"></i>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-label">哔哩哔哩</div>
+                            <div class="contact-value">海葵呀-furry控</div>
+                        </div>
+                    </li>
+                    <li class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-label">快手</div>
+                            <div class="contact-value">LuoXiaoHei-123</div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
         
+        <div class="social-links">
+            <a href="mailto:zeng5310245@qq.com" class="social-link email" title="发送邮件">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://space.bilibili.com/589046238" class="social-link bilibili" target="_blank" title="哔哩哔哩">
+                <i class="fas fa-tv"></i>
+            </a>
+            <a href="https://v.kuaishou.com/JT1tt5Lt" class="social-link kuaishou" target="_blank" title="快手">
+                <i class="fas fa-video"></i>
+            </a>
+            <a href="#" class="social-link qq" title="QQ">
+                <i class="fab fa-qq"></i>
+            </a>
+            <a href="#" class="social-link wechat" title="微信">
+                <i class="fab fa-weixin"></i>
+            </a>
+        </div>
+        
         <div class="footer">
-            <p>你愁啥，这里没有</p>
+            <p>© 2026 海葵呀 - 个人介绍页面 | 设计制作：海葵呀</p>
         </div>
     </div>
+
+    <script>
+        // 添加一些交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为联系项目添加点击效果
+            const contactItems = document.querySelectorAll('.contact-item');
+            
+            contactItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 300);
+                });
+            });
+            
+            // 为社交媒体链接添加波纹效果
+            const socialLinks = document.querySelectorAll('.social-link');
+            
+            socialLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const x = e.clientX - e.target.getBoundingClientRect().left;
+                    const y = e.clientY - e.target.getBoundingClientRect().top;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
