@@ -3,129 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>七夕抽奖报名</title>
+    <title>开学季幸运抽奖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, sans-serif;
         }
         body {
-            background: #ffe6ef;
-            padding: 30px 20px;
+            background: linear-gradient(135deg,#6366f1,#8b5cf6);
+            min-height: 100vh;
+            font-family: system-ui, sans-serif;
         }
         .container {
-            max-width: 480px;
+            max-width: 600px;
             margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
             background: #fff;
-            border-radius: 20px;
-            padding: 32px 24px;
-            box-shadow: 0 4px 16px #f8b8cc;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        h1 {
-            text-align: center;
-            color: #d6336c;
-            font-size: 24px;
-            margin-bottom:12px;
+        .hide {
+            display: none !important;
         }
-        .prize-block{
-            background-color: #fff0f6;
-            border-radius:12px;
-            padding:16px;
-            margin:20px 0;
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
         }
-        .prize-block h3{
-            color:#c2255c;
-            margin-bottom:10px;
+        .btn-primary {
+            background: #8b5cf6;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #7c3aed;
+        }
+        .btn:disabled {
+            background:#aaa;
+            cursor:not-allowed;
+        }
+        input {
+            width:100%;
+            padding:12px;
+            border:1px solid #ddd;
+            border-radius:8px;
+            margin:8px 0;
+            font-size:15px;
         }
         .prize-item{
-            font-size:15px;
-            line-height:1.8;
-            color:#444;
-        }
-        .form-item{
-            margin:18px 0;
-        }
-        label{
-            display:block;
-            margin-bottom:6px;
-            font-weight:500;
-            color:#333;
-        }
-        input{
-            width:100%;
-            padding:12px 14px;
-            border:1px solid #f2b8c8;
-            border-radius:10px;
-            font-size:16px;
-        }
-        input:focus{
-            outline:none;
-            border-color:#d6336c;
-        }
-        button{
-            width:100%;
-            background:#d6336c;
-            color:white;
-            border:none;
-            padding:14px;
-            border-radius:10px;
-            font-size:17px;
-            font-weight:bold;
-            margin-top:10px;
-        }
-        button:active{
-            background:#b02456;
-        }
-        .tip{
-            margin-top:16px;
-            text-align:center;
-            font-size:13px;
-            color:#888;
+            padding:8px 12px;
+            border-radius:8px;
+            background:#f3f4f6;
+            margin:4px 0;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>💖七夕抽奖活动</h1>
-    <div class="prize-block">
-        <h3>🎁奖品列表</h3>
-        <div class="prize-item">特等奖：100元（1份）</div>
-        <div class="prize-item">一等奖：50元（1份）</div>
-        <div class="prize-item">二等奖：25元（2份）</div>
-        <div class="prize-item">三等奖：15元（3份）</div>
-        <div class="prize-item">四等奖：蜜雪冰城10元礼品卡（5份）</div>
-        <div class="prize-item">五等奖：3张无门槛蜜雪冰城3元代金券（10份）</div>
-    </div>
+    <div class="card">
+        <h1 class="text-center text-2xl font-bold mb-4 text-purple-700">🎁开学季幸运抽奖</h1>
 
-    <form id="lotteryForm">
-        <div class="form-item">
-            <label>你的姓名（必填）</label>
-            <input type="text" id="username" placeholder="请输入姓名" required>
+        <!-- 1.信息填写表单 -->
+        <div id="page-form">
+            <div class="mb-3">
+                <label>姓名（QQ/VX昵称）</label>
+                <input type="text" id="nickname" placeholder="请输入你的昵称">
+            </div>
+            <div class="mb-3">
+                <label>账号（QQ/VX号）</label>
+                <input type="text" id="account" placeholder="请输入QQ或者VX账号">
+            </div>
+            <div class="mb-4 text-sm text-gray-600">
+                <div class="font-bold mb-2">奖品列表：</div>
+                <div class="prize-item">🏆特等奖：100元（1份）</div>
+                <div class="prize-item">🥇一等奖：13.14元（1份）</div>
+                <div class="prize-item">🥈二等奖：5.2元（2份）</div>
+                <div class="prize-item">🥉三等奖：3元（3份）</div>
+                <div class="prize-item">🎫四等奖：蜜雪冰城10元礼品卡（5份）</div>
+                <div class="prize-item">🎟️五等奖：3张蜜雪冰城1元代金券（10份）</div>
+                <div class="prize-item">😶安慰奖：谢谢惠顾（100份）</div>
+            </div>
+            <button class="btn btn-primary" onclick="submitUserInfo()">提交信息进入抽奖</button>
         </div>
-        <div class="form-item">
-            <label>参与序号（必填）</label>
-            <input type="number" id="seq" placeholder="填写你的序号" required>
+
+        <!-- 2.抽奖主页面 -->
+        <div id="page-lottery" class="hide">
+            <div class="mb-3">
+                <div>用户：<span id="showNick"></span></div>
+                <div>今日剩余抽奖次数：<span id="leftCount">0</span> /20</div>
+                <div id="cooltip" class="text-red-500 mt-2"></div>
+            </div>
+            <div class="text-center my-6">
+                <button class="btn btn-primary text-xl py-5" id="lotteryBtn" onclick="startLottery()">开始抽奖</button>
+            </div>
+            <div id="needDoQuizTip" class="text-center text-orange-600 mt-3 hide">⚠️本次抽奖需要完成答题获取机会</div>
         </div>
-        <button type="submit">✨提交参与抽奖</button>
-    </form>
-    <div class="tip">提交成功后自动跳转活动页面</div>
+
+        <!-- 3.答题页面 -->
+        <div id="page-quiz" class="hide">
+            <h3 class="font-bold text-lg mb-2">📝答题获取抽奖机会</h3>
+            <div id="quiz-desc" class="mb-2"></div>
+            <input type="text" id="quiz-ans" placeholder="输入答案">
+            <button class="btn btn-primary mt-2" onclick="checkAnswer()">提交答案</button>
+        </div>
+
+        <!-- 4.中奖结果页 -->
+        <div id="page-result" class="hide">
+            <h2 class="text-xl font-bold text-center mb-3" id="result-title"></h2>
+            <div class="text-center mb-4" id="result-desc"></div>
+            <div id="phoneInputWrap" class="hide">
+                <label>请填写手机号（发放优惠券使用）</label>
+                <input type="tel" id="phoneNum" placeholder="填写手机号">
+                <button class="btn btn-primary mt-2" onclick="submitPhone()">提交手机号</button>
+            </div>
+            <div id="backBtnWrap" class="hide">
+                <button class="btn btn-primary" onclick="backLottery()">返回抽奖</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-    const form = document.getElementById('lotteryForm');
-    form.addEventListener('submit',function(e){
-        e.preventDefault();
-        const name = document.getElementById('username').value.trim();
-        const num = document.getElementById('seq').value.trim();
-        if(!name || !num){
-            alert("姓名和序号都必须填写！");
-            return;
+// 奖品配置
+const prizeList = [
+    {name:"特等奖：100元",count:1,type:"money"},
+    {name:"一等奖：13.14元",count:1,type:"money"},
+    {name:"二等奖：5.2元",count:2,type:"money"},
+    {name:"三等奖：3元",count:3,type:"money"},
+    {name:"四等奖：蜜雪冰城10元礼品卡",count:5,type:"couponNeedPhone"},
+    {name:"五等奖：3张蜜雪冰城1元代金券",count:10,type:"couponNeedPhone"},
+    {name:"安慰奖：谢谢惠顾",count:100,type:"thanks"}
+]
+const totalAll = prizeList.reduce((sum,p)=>sum+p.count,0);
+const jumpUrls = [
+    "https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4",
+    "https://m.baidu.com/bh/m/detail/ar_6750406566749707236"
+];
+
+// 题库，难度从小到大小学→初中→高中→大学
+const quizBank = [
+    {q:"12+8等于多少？",a:"20"},
+    {q:"7*6等于多少？",a:"42"},
+    {q:"一年有多少个月？",a:"12"},
+    {q:"水的化学式？",a:"H2O"},
+    {q:"勾股定理 3,4,__",a:"5"},
+    {q:"sin30°等于多少",a:"0.5"},
+    {q:"2的10次方等于",a:"1024"},
+    {q:"log₂8等于多少",a:"3"},
+    {q:"∫0到1 2x dx = ?",a:"1"},
+    {q:"二进制1010转十进制",a:"10"}
+];
+
+// 本地存储
+function getStorage(){
+    let s = localStorage.getItem("lotteryData");
+    if(!s) return {
+        nickname:"",account:"",
+        todayDate:getDayStr(),
+        usedCount:0,
+        wrongTimes:0,
+        coolEnd:0
+    }
+    return JSON.parse(s);
+}
+function saveStorage(obj){
+    localStorage.setItem("lotteryData",JSON.stringify(obj));
+}
+function getDayStr(){
+    let d=new Date();
+    return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+}
+// 重置每日数据
+function resetDailyIfNeed(){
+    let data = getStorage();
+    let nowDay = getDayStr();
+    if(data.todayDate !== nowDay){
+        data.todayDate = nowDay;
+        data.usedCount = 0;
+        data.wrongTimes = 0;
+        data.coolEnd = 0;
+        saveStorage(data);
+    }
+}
+
+// 页面切换
+function hideAllPage(){
+    document.querySelectorAll("#page-form,#page-lottery,#page-quiz,#page-result").forEach(el=>el.classList.add("hide"));
+}
+
+// 提交用户信息
+function submitUserInfo(){
+    let nick = document.getElementById("nickname").value.trim();
+    let acc = document.getElementById("account").value.trim();
+    if(!nick || !acc){
+        alert("昵称和账号不能为空！");
+        return;
+    }
+    let d = getStorage();
+    d.nickname = nick;
+    d.account = acc;
+    saveStorage(d);
+    enterLotteryPage();
+}
+
+function enterLotteryPage(){
+    resetDailyIfNeed();
+    hideAllPage();
+    document.getElementById("page-lottery").classList.remove("hide");
+    let data = getStorage();
+    document.getElementById("showNick").innerText = data.nickname;
+    updateLotteryView();
+}
+
+function updateLotteryView(){
+    let data = getStorage();
+    let left = 20 - data.usedCount;
+    if(left<0) left=0;
+    document.getElementById("leftCount").innerText = left;
+    const now = Date.now();
+    const coolTipDom = document.getElementById("cooltip");
+    const btn = document.getElementById("lotteryBtn");
+    if(data.coolEnd > now){
+        let remain = Math.ceil((data.coolEnd - now)/1000);
+        coolTipDom.innerText = `冷却中，请等待${remain}秒`;
+        btn.disabled=true;
+    }else{
+        coolTipDom.innerText="";
+        btn.disabled=false;
+    }
+}
+
+// 概率抽奖
+function randomPrize(){
+    let r = Math.random()*totalAll;
+    let cur=0;
+    for(let p of prizeList){
+        cur += p.count;
+        if(r <= cur){
+            return p;
         }
-        // 填写完成跳转目标地址
-        window.location.href = "https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4";
-    })
+    }
+    return prizeList[prizeList.length-1];
+}
+
+// 开始抽奖
+function startLottery(){
+    resetDailyIfNeed();
+    let data = getStorage();
+    const now = Date.now();
+    if(data.coolEnd > now){
+        alert("还在冷却时间，不能操作！");
+        return;
+    }
+    if(data.usedCount >=20){
+        alert("今日抽奖次数已用尽，明天再来！");
+        return;
+    }
+    // 第一次免费，后面需要答题
+    if(data.usedCount ===0){
+        doLotteryCore();
+    }else{
+        startQuiz();
+    }
+}
+
+let currentQuizIndex = 0;
+function startQuiz(){
+    hideAllPage();
+    document.getElementById("page-quiz").classList.remove("hide");
+    let data = getStorage();
+    // 根据错误次数偏移题目难度
+    currentQuizIndex = Math.min(data.wrongTimes, quizBank.length-1);
+    let qobj = quizBank[currentQuizIndex];
+    document.getElementById("quiz-desc").innerText = `题目：${qobj.q}`;
+    document.getElementById("quiz-ans").value = "";
+}
+
+function checkAnswer(){
+    let data = getStorage();
+    let qobj = quizBank[currentQuizIndex];
+    let userAns = document.getElementById("quiz-ans").value.trim();
+    if(userAns === qobj.a){
+        //答对，获得抽奖机会
+        data.wrongTimes = 0;
+        saveStorage(data);
+        doLotteryCore();
+    }else{
+        //答错，冷却时间：基础60s，错一次+30s
+        data.wrongTimes +=1;
+        let waitSec = 60 + (data.wrongTimes-1)*30;
+        data.coolEnd = Date.now() + waitSec*1000;
+        saveStorage(data);
+        alert(`回答错误！需要等待${waitSec}秒才可以重试。错误次数:${data.wrongTimes}`);
+        enterLotteryPage();
+    }
+}
+
+// 执行抽奖
+function doLotteryCore(){
+    resetDailyIfNeed();
+    let data = getStorage();
+    data.usedCount +=1;
+    saveStorage(data);
+    hideAllPage();
+    document.getElementById("page-result").classList.remove("hide");
+    let winPrize = randomPrize();
+    document.getElementById("result-title").innerText = "🎉抽奖结果";
+    document.getElementById("result-desc").innerText = `恭喜获得：${winPrize.name}`;
+    document.getElementById("phoneInputWrap").classList.add("hide");
+    document.getElementById("backBtnWrap").classList.add("hide");
+
+    if(winPrize.type === "thanks"){
+        //安慰奖 返回抽奖
+        document.getElementById("backBtnWrap").classList.remove("hide");
+    }else if(winPrize.type === "couponNeedPhone"){
+        //四五等奖 需要手机号
+        document.getElementById("phoneInputWrap").classList.remove("hide");
+    }else{
+        //特等奖一二三等奖，直接跳转随机链接
+        gotoRandomUrl();
+    }
+}
+
+function submitPhone(){
+    let phone = document.getElementById("phoneNum").value.trim();
+    if(!phone || phone.length!==11){
+        alert("请输入11位有效手机号");
+        return;
+    }
+    gotoRandomUrl();
+}
+
+function gotoRandomUrl(){
+    let rnd = jumpUrls[Math.floor(Math.random()*jumpUrls.length)];
+    window.location.href = rnd;
+}
+
+function backLottery(){
+    enterLotteryPage();
+}
+
+// 页面加载初始化
+window.onload = function(){
+    resetDailyIfNeed();
+    let d = getStorage();
+    if(d.nickname && d.account){
+        enterLotteryPage();
+    }else{
+        hideAllPage();
+        document.getElementById("page-form").classList.remove("hide");
+    }
+    //定时刷新冷却倒计时
+    setInterval(()=>{
+        if(!document.getElementById("page-lottery").classList.contains("hide")){
+            updateLotteryView();
+        }
+    },1000)
+}
 </script>
 </body>
 </html>
